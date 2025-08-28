@@ -98,7 +98,6 @@ def validate_columns(df: pd.DataFrame) -> list[str]:
 def get_company_column(df: pd.DataFrame) -> str:
     return "Company Name" if "Company Name" in df.columns else "Symbol"
 
-@st.cache_data(show_spinner=False)
 def aggregate_sector_daily(df: pd.DataFrame, sector: str, param: str) -> pd.DataFrame:
     df_sector = df.loc[df["Sector"] == sector, ["Date", param]].copy()
     if df_sector.empty:
@@ -108,7 +107,6 @@ def aggregate_sector_daily(df: pd.DataFrame, sector: str, param: str) -> pd.Data
                    .rename(columns={param: f"Mean_{param}_{sector}"}))
     return out
 
-@st.cache_data(show_spinner=False)
 def aggregate_company_daily(df: pd.DataFrame, company_col: str, company: str, param: str, sector: str | None = None) -> pd.DataFrame:
     if sector:
         dfx = df[(df["Sector"] == sector) & (df[company_col] == company)][["Date", param]].copy()
@@ -121,7 +119,6 @@ def aggregate_company_daily(df: pd.DataFrame, company_col: str, company: str, pa
               .rename(columns={param: f"{company} — {param}"}))
     return out
 
-@st.cache_data(show_spinner=False)
 def sector_company_counts(df: pd.DataFrame) -> pd.DataFrame:
     return (df[["Symbol", "Sector"]]
               .drop_duplicates()
