@@ -136,7 +136,7 @@ st.title("Pakistan Stock Exchange Data Analysis")
 st.caption(
     f"Interactive dashboard on PSX OHLCV data • Updated: {_friendly_date(TODAY)}"
 )
-st.caption("Data gets auto-updated daily up to the previous trading day by scraping the official PSX website")
+st.caption("Data gets auto-updated daily up to the previous trading day by scraping the official PSX website.")
 with st.expander("What you can do here (quick guide)", expanded=False):
     st.markdown(
         """
